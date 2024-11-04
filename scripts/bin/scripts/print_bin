@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Script to print the name and contents of each file in the bin directory
+
+# Set the bin directory path
+bin="/home/loganunix/bin"
+
+# Print an empty line
+echo 
+
+# Loop through each file in the bin directory
+for file in "${bin}"/* ; do
+    # Print the file name
+    echo "File name: ${file}"
+    # Print a separator line
+    echo "------------------------------------"
+    # Print an empty line
+    echo
+    # Print the file contents
+    cat "${file}"
+    # Print an empty line
+    echo
+done
+

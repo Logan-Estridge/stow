@@ -1,0 +1,28 @@
+#!/bin/bash
+
+## Script for transferring files from my Windows Desktop into lre0058@cruntch.chem.unt.edu ~/bin
+# 'ttl' = transfer to lre0058
+
+# Navigate to the directory
+cd /mnt/c/Users/logan/OneDrive/Desktop
+
+name=$1
+
+# Set the username and remote host
+username="lre0058"
+remote_host="cruntch4.chem.unt.edu"
+
+# Set the remote directory
+remote_directory="/home/${username}/bin"
+
+# Check if the name is a file or a directory
+if [ -d "${name}" ] ; then
+    scp -r "${name}" "${username}@${remote_host}:${remote_directory}"
+elif [ -f "${name}" ] ; then
+    scp "${name}" "${username}@${remote_host}:${remote_directory}"
+else
+    echo "${name} does not exist :("
+    exit 1
+fi
+
+echo "Transfer completed :)"

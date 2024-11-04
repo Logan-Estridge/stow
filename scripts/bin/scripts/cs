@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Combination of clear, squeue, and ll
+clear
+squeue
+ls -alF --color=auto

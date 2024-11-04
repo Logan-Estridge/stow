@@ -1,0 +1,16 @@
+#!/bin/bash
+## Script for moving files from your current working directory to the bin
+
+# Ask for the name of the file or folder
+echo "Enter the name of the file or folder you want to move:"
+read name
+
+# Check if the file or a directory exists, if so move to bin, else inform "does not exist"
+if [ ./"${name}" ] ; then
+        mv ./"${name}" /home/lre0058/bin
+else
+    echo "${name} does not exist :("
+    exit 1
+fi
+
+echo "Move completed :)"

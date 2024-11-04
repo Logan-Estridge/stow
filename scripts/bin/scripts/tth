@@ -1,0 +1,31 @@
+#!/bin/bash
+
+## Script for transferring files from the bin of lre0058@cruntch.chem.unt.edu into my pwd
+# 'tth' = transfer to here
+
+# Ask for the name of the file or folder
+echo "Enter the name of the file or folder you want to transfer:"
+read name
+
+# Set the username and remote host
+username="lre0058"
+remote_host="cruntch4.chem.unt.edu"
+
+# Set the remote file location
+remote_file="/home/${username}/bin/${name}"
+
+# Check if the name is a file or a directory on the remote machine
+if ssh "${username}@${remote_host}" test -d "${remote_file}" ; then
+    scp -r "${username}@${remote_host}:${remote_file}" ${name}
+    # Delete the directory on the remote machine
+    ssh "${username}@${remote_host}" rm -r "${remote_file}"
+elif ssh "${username}@${remote_host}" test -f "${remote_file}" ; then
+    scp "${username}@${remote_host}:${remote_file}" ${name}
+    # Delete the directory on the remote machine
+    ssh "${username}@${remote_host}" rm -r "${remote_file}"
+else
+    echo "${name} does not exist :("
+    exit 1
+fi
+
+echo "Transfer completed :)"

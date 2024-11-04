@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## Script for transferring files from my Windows Desktop into compchem18@cruntch.chem.unt.edu ~/bin
+# 'ttc' = transfer to compchem
+
+# Navigate to the directory
+cd /mnt/c/Users/logan/OneDrive/Desktop
+
+# Ask for the name of the file or folder
+echo "Enter the name of the file or folder you want to transfer:"
+read name
+
+# Set the username and remote host
+username="compchem18"
+remote_host="cruntch4.chem.unt.edu"
+
+# Set the remote directory
+remote_directory="/home/${username}/bin"
+
+# Check if the name is a file or a directory
+if [ -d "${name}" ] ; then
+    scp -r "${name}" "${username}@${remote_host}:${remote_directory}"
+elif [ -f "${name}" ] ; then
+    scp "${name}" "${username}@${remote_host}:${remote_directory}"
+else
+    echo "${name} does not exist :("
+    exit 1
+fi
+
+echo "Transfer completed :)"
